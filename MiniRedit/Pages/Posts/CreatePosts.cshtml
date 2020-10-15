@@ -1,0 +1,60 @@
+﻿@page "{userid:int?}"
+@model MiniRedit.Pages.Posts.CreatePostsModel
+<div class="container text-center">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Make Message</h1>
+            <div class=" text-right">
+                @if (Model.User.UserName != null)
+                {
+                    <p class="textstyle">Du er loget ind som:</p>
+                    @Model.User.UserName
+                }
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+
+
+    <form method="post" asp-route="@Model.User">
+        <div class="row" asp-validation-summary="All">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <p class="textstyle">Post Title: </p>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                   asp-for="@Model.posts.Title" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <p class="textstyle">Post content:</p>
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                               asp-for="@Model.posts.Content" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <p class="textstyle">Posts to Board: </p>
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                               asp-for="Board" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div>
+                    <br />
+                    <p> </p>
+                    <button type="submit" class="btn btn-info">Post post to board</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

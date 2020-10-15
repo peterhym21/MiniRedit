@@ -1,0 +1,67 @@
+﻿@page "{id:int}"
+@model MiniRedit.Pages.Posts.PostDetailsModel
+<div class="container">
+    <div class="col-lg-12">
+        <h1>Post Details</h1>
+    </div>
+    <br />
+    <div class="col-lg-12">
+        <form method="post" asp-route="@Model.Posts.PostId">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <p class="textstyle">Post Title: </p>
+                            <div class="input-group">
+                                <label>@Model.Posts.Title</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <p class="textstyle">Post Content: </p>
+                            <div class="input-group">
+                                <label>@Model.Posts.Content</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <p class="textstyle">Was Posted: </p>
+                            <div class="input-group">
+                                <label>@Model.Posts.Date</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <p class="textstyle">Posted to Board: </p>
+                            <div class="input-group">
+                                <label>@Model.Boards.Title</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <p class="textstyle">Posted by User: </p>
+                            <div class="input-group">
+                                <label>@Model.Users.UserName</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <br />
+        <a asp-page="../Index" class="btn btn-primary"><i class="btn text-white">Back To Home</i></a>
+    </div>
+</div>

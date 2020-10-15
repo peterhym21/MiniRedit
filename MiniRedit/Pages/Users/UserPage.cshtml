@@ -1,0 +1,71 @@
+﻿@page "{userid:int?}"
+@model MiniRedit.Pages.Users.UserPageModel
+<div class="text-center container">
+
+    <div class="col-lg-12">
+        <h1>Welcome</h1>
+        <div>
+
+            @if (Model.User.UserId == 0 || Model.User == null)
+            {
+                <h2>Du er ikke loget ind</h2>
+            }
+            else
+            {
+                <h2>Du er loget ind som: </h2>
+                <h2>
+                    @Model.User.UserName
+                </h2>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="col-lg-12">
+
+        <a asp-page="/Posts/CreatePosts" asp-route-userid=@Model.User.UserId class="btn btn-primary">Create new Message / Post</a>
+
+        <br />
+        <br />
+
+        <a asp-page="/Edit/EditUsers" asp-route-userid=@Model.User.UserId class="btn btn-primary">Edit User</a>
+
+        <br />
+        <br />
+
+        <a asp-page="/Delete/DeleteUseres" asp-route-userid=@Model.User.UserId class="btn btn-primary">Delete User</a>
+
+    </div>
+    <br />
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                @if (Model.Posts != null)
+                {
+                    <table class="table table-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>board</th>
+                        </tr>
+                        @foreach (var posts in Model.Posts)
+                        {
+                            <tr>
+                                <td>@posts.Title</td>
+                                <td>@posts.Content</td>
+                                @foreach (var boards in Model.Boards)
+                                {
+                                    @if (posts.BoardId == boards.BoardId)
+                                    {
+                                        <td>@boards.BoardId</td>
+                                    }}
+                                <td>
+                                    <a asp-page="/Posts/Postdetails" asp-route-id=@posts.PostId>Details</a> 
+                                </td>
+
+                            </tr>
+                        }
+                    </table>}
+            </div>
+        </div>
+    </div>
+</div>
