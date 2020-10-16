@@ -1,8 +1,19 @@
 ﻿@page "{id:int}"
 @model MiniRedit.Pages.Posts.EditPostsModel
 <div class="container">
-    <div class="col-lg-12">
-        <h1>Edit Post</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Edit Posts</h1>
+            @*<div class=" text-right">
+                @if (Model.User.UserName != null)
+                {
+                    <p class="textstyle">Du er logget ind som:</p>
+                    @Model.User.UserName
+                }
+            </div>*@
+            <br />
+            <br />
+        </div>
     </div>
     <br />
     <div class="col-lg-12">
