@@ -8,17 +8,17 @@ using Microsoft.Extensions.Logging;
 using MiniReditServices.DTO;
 using MiniReditServices.Interfaces;
 
-namespace MiniRedit.Pages.Boards
+namespace MiniRedit.Pages.Users
 {
-    public class BoardDetailsModel : PageModel
+    public class DeleteUserModel : PageModel
     {
         #region Feltes and ctor
         private readonly IBoardsServices _boardsServices;
         private readonly IPostsServices _postsServices;
         private readonly IUsersServices _usersServices;
-        private readonly ILogger<BoardDetailsModel> _logger;
+        private readonly ILogger<DeleteUserModel> _logger;
 
-        public BoardDetailsModel(IBoardsServices boardsServices, IPostsServices postsServices, IUsersServices usersServices, ILogger<BoardDetailsModel> logger)
+        public DeleteUserModel(IBoardsServices boardsServices, IPostsServices postsServices, IUsersServices usersServices, ILogger<DeleteUserModel> logger)
         {
             _boardsServices = boardsServices;
             _postsServices = postsServices;
@@ -27,12 +27,20 @@ namespace MiniRedit.Pages.Boards
         }
         #endregion
 
-        public BoardsDTO Boards { get; set; }
 
-        public async Task OnGetAsync(int id)
+        [BindProperty]
+        public UsersDTO User { get; set; }
+
+        public async Task OnGetAsync(int userid)
         {
-            Boards = await _boardsServices.GetOneBoard(id);
+            User = await _usersServices.GetUserById(userid);
         }
 
+        public async Task<IActionResult> OnPostAsync(int userid)
+        {
+            await _usersServices.DeleteUser(userid);
+
+            return RedirectToPage("../Index");
+        }
     }
 }

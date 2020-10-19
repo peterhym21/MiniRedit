@@ -19,7 +19,11 @@
 
                             <td>@boards.Title</td>
                             <td>
-                                <a asp-page="" class="toggleLoader" asp-route-id=@boards.BoardId>Edit</a> |
+                                @if (boards.BoardId != 1)
+                                {
+                                    <a asp-page="EditBoards" class="toggleLoader" asp-route-id=@boards.BoardId>Edit</a>
+                                }
+                                |
                                 <a asp-page="BoardDetails" class="toggleLoader" asp-route-id=@boards.BoardId>Details</a>
                             </td>
                         </tr>
