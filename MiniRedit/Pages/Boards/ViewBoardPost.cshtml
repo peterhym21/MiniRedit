@@ -23,9 +23,7 @@
                                 <td>@posts.Title</td>
                                 <td>@posts.Content </td>
                                 <td>
-                                    <a asp-page="/Edit/EditMessage" asp-route-id=@posts.PostId>Edit</a> |
-                                    <a asp-page="/Details/DetaileMessages" asp-route-id=@posts.PostId>Details</a> |
-                                    <a asp-page="/Delete/DeleteMessage" asp-route-id=@posts.PostId>Delete</a>
+                                    <a asp-page="/Posts/Postdetails" class="toggleLoader" asp-route-id=@posts.PostId>Details</a> 
                                 </td>
                             </tr>
                         }

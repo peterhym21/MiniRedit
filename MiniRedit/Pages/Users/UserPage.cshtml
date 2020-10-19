@@ -22,17 +22,17 @@
     <br />
     <div class="col-lg-12">
 
-        <a asp-page="/Posts/CreatePosts" asp-route-userid=@Model.User.UserId class="btn btn-primary">Create new Message / Post</a>
+        <a asp-page="/Posts/CreatePosts" asp-route-userid=@Model.User.UserId class="btn btn-primary toggleLoader">Create new Message / Post</a>
 
         <br />
         <br />
 
-        <a asp-page="/Edit/EditUsers" asp-route-userid=@Model.User.UserId class="btn btn-primary">Edit User</a>
+        <a asp-page="/Edit/EditUsers" asp-route-userid=@Model.User.UserId class="btn btn-primary toggleLoader">Edit User</a>
 
         <br />
         <br />
 
-        <a asp-page="/Delete/DeleteUseres" asp-route-userid=@Model.User.UserId class="btn btn-primary">Delete User</a>
+        <a asp-page="/Delete/DeleteUseres" asp-route-userid=@Model.User.UserId class="btn btn-primary toggleLoader">Delete User</a>
 
     </div>
     <br />
@@ -59,7 +59,7 @@
                                         <td>@boards.BoardId</td>
                                     }}
                                 <td>
-                                    <a asp-page="/Posts/Postdetails" asp-route-id=@posts.PostId>Details</a> 
+                                    <a asp-page="/Posts/Postdetails" class="toggleLoader" asp-route-id=@posts.PostId>Details</a> 
                                 </td>
 
                             </tr>

@@ -37,7 +37,9 @@ namespace MiniReditRepository.Repository
             SqlDataReader myReader = cmd.ExecuteReader();
             while (myReader.Read())
             {
-                users.Add(new Users { UserId = (int)myReader["UseriId"], 
+                users.Add(new Users 
+                {
+                    UserId = (int)myReader["UseriId"], 
                     Name = (string)myReader["Name"], 
                     UserName = (string)myReader["UserName"], 
                     Password = (string)myReader["Password"],

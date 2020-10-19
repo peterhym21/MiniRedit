@@ -19,8 +19,8 @@
 
                             <td>@boards.Title</td>
                             <td>
-                                <a asp-page="" asp-route-id=@boards.BoardId>Edit</a> |
-                                <a asp-page="BoardDetails" asp-route-id=@boards.BoardId>Details</a>
+                                <a asp-page="" class="toggleLoader" asp-route-id=@boards.BoardId>Edit</a> |
+                                <a asp-page="BoardDetails" class="toggleLoader" asp-route-id=@boards.BoardId>Details</a>
                             </td>
                         </tr>
                     }

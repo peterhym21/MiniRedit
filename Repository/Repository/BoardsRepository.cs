@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace MiniReditRepository.Repository
 {
@@ -36,7 +37,13 @@ namespace MiniReditRepository.Repository
             SqlDataReader myReader = cmd.ExecuteReader();
             while (myReader.Read())
             {
-                boards.Add(new Boards { BoardId = (int)myReader["BoardId"], Title = (string)myReader["Title"], Date = (DateTime)myReader["Date"], Deletet = (bool)myReader["deletet"] });
+                boards.Add(new Boards 
+                { 
+                    BoardId = (int)myReader["BoardId"], 
+                    Title = (string)myReader["Title"], 
+                    Date = (DateTime)myReader["Date"], 
+                    Deletet = (bool)myReader["deletet"]
+                });
             }
 
             con.Close();
