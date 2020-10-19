@@ -10,15 +10,15 @@ using MiniReditServices.Interfaces;
 
 namespace MiniRedit.Pages.Boards
 {
-    public class EditBoardsModel : PageModel
+    public class DeleteBoardModel : PageModel
     {
         #region Feltes and ctor
         private readonly IBoardsServices _boardsServices;
         private readonly IPostsServices _postsServices;
         private readonly IUsersServices _usersServices;
-        private readonly ILogger<EditBoardsModel> _logger;
+        private readonly ILogger<DeleteBoardModel> _logger;
 
-        public EditBoardsModel(IBoardsServices boardsServices, IPostsServices postsServices, IUsersServices usersServices, ILogger<EditBoardsModel> logger)
+        public DeleteBoardModel(IBoardsServices boardsServices, IPostsServices postsServices, IUsersServices usersServices, ILogger<DeleteBoardModel> logger)
         {
             _boardsServices = boardsServices;
             _postsServices = postsServices;
@@ -29,26 +29,16 @@ namespace MiniRedit.Pages.Boards
 
         public BoardsDTO Boards { get; set; }
 
-        [BindProperty]
-        public string Title { get; set; }
-
         public async Task OnGetAsync(int id)
         {
             Boards = await _boardsServices.GetOneBoard(id);
         }
-        public async Task<IActionResult> OnPostAsync(int id)
+
+        public async Task<IActionResult> OnPostAsynce(int id)
         {
-            Boards = await _boardsServices.GetOneBoard(id);
-
-            if (Title != null)
-            {
-                Boards.Title = Title;
-                await _boardsServices.UpdateBoard(Boards);
-            }
-            else
-                await _boardsServices.UpdateBoard(Boards);
-
+            await _boardsServices.DeleteBoard(id);
             return RedirectToPage("ViewAllBoards");
         }
+
     }
 }

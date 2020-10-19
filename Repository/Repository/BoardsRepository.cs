@@ -109,7 +109,7 @@ namespace MiniReditRepository.Repository
         {            
             // SQL Conection
             SqlConnection con = new SqlConnection(conString);
-            SqlCommand cmd = new SqlCommand("UpdateCategorys", con);
+            SqlCommand cmd = new SqlCommand("UpdateBoard", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@NewBoardTitle", boardsEnt.Title);

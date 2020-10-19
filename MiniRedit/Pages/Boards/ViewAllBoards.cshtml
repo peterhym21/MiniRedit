@@ -16,15 +16,15 @@
                     @foreach (var boards in Model.Boards)
                     {
                         <tr>
-
                             <td>@boards.Title</td>
                             <td>
+                                <a asp-page="BoardDetails" class="toggleLoader" asp-route-id=@boards.BoardId>Details</a>
                                 @if (boards.BoardId != 1)
                                 {
-                                    <a asp-page="EditBoards" class="toggleLoader" asp-route-id=@boards.BoardId>Edit</a>
+                                    <i> | </i>
+                                    <a asp-page="EditBoards" class="toggleLoader" asp-route-id=@boards.BoardId>Edit</a> <i> | </i>
+                                    <a asp-page="DeleteBoard" class="toggleLoader" asp-route-id=@boards.BoardId>DeleteBoards</a>
                                 }
-                                |
-                                <a asp-page="BoardDetails" class="toggleLoader" asp-route-id=@boards.BoardId>Details</a>
                             </td>
                         </tr>
                     }
