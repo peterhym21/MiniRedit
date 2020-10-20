@@ -23,17 +23,17 @@ namespace MiniReditServices.Services
             _boardsRepository = boardsRepository;
         }
 
-        public async Task<int> CreateBoard(BoardsDTO boardsDTO)
+        public async Task<int> CreateBoard(string title)
         {
             try
             {
-                int resultId = await _boardsRepository.CreateBoard(_mappingService._mapper.Map<Boards>(boardsDTO));
-                LogInformation($"Successfully created a new board : BoardId {boardsDTO.BoardId}, Title {boardsDTO.Title} :");
+                int resultId = await _boardsRepository.CreateBoard(title);
+                LogInformation($"Successfully created a new board : BoardId {resultId}, Title {title} :");
                 return resultId;
             }
             catch (Exception ex)
             {
-                LogError($"Failed to create a new board : boardId {boardsDTO.BoardId}, Title {boardsDTO.Title} :", ex);
+                LogError($"Failed to create a new board : Title {title} :", ex);
                 return 1;
 
             }

@@ -65,9 +65,8 @@ namespace MiniRedit.Pages.Posts
             try
             {
                 posts.UserId = userid;
-                board.Title = Board;
 
-                posts.BoardId = await _boardsServices.CreateBoard(board);
+                posts.BoardId = await _boardsServices.CreateBoard(Board);
                 postId = await _postsServices.CreatePost(posts);
 
                 return RedirectToPage("PostDetails", new { id = postId });

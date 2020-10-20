@@ -77,7 +77,7 @@ namespace MiniReditRepository.Repository
         }
 
 
-        public async Task<int> CreateBoard(Boards boardsEnt)
+        public async Task<int> CreateBoard(string title)
         {
             boards = new List<Boards>();
             int boardId = 0;
@@ -87,7 +87,7 @@ namespace MiniReditRepository.Repository
             SqlCommand cmd = new SqlCommand("CreateBoard", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@NewBoardTitle", boardsEnt.Title);
+            cmd.Parameters.AddWithValue("@NewBoardTitle", title);
 
             con.Open();
             cmd.ExecuteNonQuery();
@@ -96,7 +96,7 @@ namespace MiniReditRepository.Repository
 
             foreach (Boards boardsl in boards)
             {
-                if (boardsl.Title == boardsEnt.Title)
+                if (boardsl.Title == title)
                 {
                     boardId = boardsl.BoardId;
                 }

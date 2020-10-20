@@ -225,7 +225,7 @@ namespace MiniReditRepository.Repository
         {
             //SQL connection
             SqlConnection con = new SqlConnection(conString);
-            SqlCommand cmd = new SqlCommand("DeleteMessage", con);
+            SqlCommand cmd = new SqlCommand("DeletePost", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@PostId", postId);

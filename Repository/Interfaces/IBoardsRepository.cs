@@ -11,7 +11,7 @@ namespace MiniReditRepository.Interfaces
     {
         Task<List<Boards>> GetBoards();
         Task<Boards> GetOneBoard(int BoardId);
-        Task<int> CreateBoard(Boards boardsEnt);
+        Task<int> CreateBoard(string title);
         Task<int> UpdateBoard(Boards boardsEnt);
         Task DeleteBoard(int BoardId);
     }

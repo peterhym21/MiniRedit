@@ -11,7 +11,7 @@ namespace MiniReditServices.Interfaces
     {
         Task<List<BoardsDTO>> GetBoards();
         Task<BoardsDTO> GetOneBoard(int BoardId);
-        Task<int> CreateBoard(BoardsDTO boardsDTO);
+        Task<int> CreateBoard(string title);
         Task<int> UpdateBoard(BoardsDTO boardsDTO);
         Task DeleteBoard(int BoardId);
     }

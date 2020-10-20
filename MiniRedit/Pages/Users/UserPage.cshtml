@@ -46,6 +46,7 @@
                             <th>Title</th>
                             <th>Content</th>
                             <th>board</th>
+                            <th>Interactives</th>
                         </tr>
                         @foreach (var posts in Model.Posts)
                         {
@@ -56,11 +57,13 @@
                                 {
                                     @if (posts.BoardId == boards.BoardId)
                                     {
-                                        <td>@boards.BoardId</td>
+                                        <td>@boards.Title</td>
                                     }}
-                                <td>
-                                    <a asp-page="/Posts/Postdetails" class="toggleLoader" asp-route-id=@posts.PostId>Details</a> 
-                                </td>
+                            <td>
+                                <a asp-page="/Posts/Postdetails" class="toggleLoader" asp-route-id=@posts.PostId>Details</a>  |
+                                <a asp-page="/Posts/EditPosts" class="toggleLoader" asp-route-id=@posts.PostId>Edit</a>  |
+                                <a asp-page="/Posts/DeletePosts" class="toggleLoader" asp-route-id=@posts.PostId asp-route-userid="@Model.User.UserId">Delete</a>
+                            </td>
 
                             </tr>
                         }

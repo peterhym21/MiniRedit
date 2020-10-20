@@ -85,6 +85,7 @@ Create Procedure ReadBoards
 As
 Select *
 From Boards
+Where Deletet = 1
 GO
 
 
@@ -94,7 +95,7 @@ Create Procedure ReadOneBoard
 As
 Select *
 From Boards
-Where BoardId = @BoardId
+Where BoardId = @BoardId and Deletet = 1
 GO
 
 
@@ -105,7 +106,7 @@ Create Procedure UpdateBoard
 As
 UPDATE Boards 
 SET Title = @NewBoardTitle
-WHERE BoardId = @BoardId
+WHERE BoardId = @BoardId and Deletet = 1
 GO
 
 
@@ -151,6 +152,7 @@ Create Procedure ReadPosts
 As
 Select *
 From Posts
+Where Deletet = 1
 GO
 
 
@@ -160,7 +162,7 @@ Create Procedure ReadOnePost
 As
 Select *
 From Posts
-Where PostId = @PostId
+Where PostId = @PostId and Deletet = 1
 GO
 
 
@@ -170,7 +172,7 @@ Create Procedure GetPostByBoard
 As
 Select *
 From Posts
-Where BoardId = @BoardId
+Where BoardId = @BoardId and Deletet = 1
 GO
 
 
@@ -180,7 +182,7 @@ Create Procedure GetPostByuserId
 As
 Select *
 From Posts
-Where UserId = @UserId
+Where UserId = @UserId and Deletet = 1
 GO
 
 
@@ -189,6 +191,7 @@ Create Procedure GetTopTenPosts
 As
 Select Top 10 *
 From Posts
+Where Deletet = 1
 Order By PostId DESC
 GO
 
@@ -202,17 +205,18 @@ Create Procedure UpdatePost
 As
 UPDATE Posts
 SET Title = @Title, Content = @Content, BoardId = @BoardId
-WHERE PostId = @PostId
+WHERE PostId = @PostId and Deletet = 1
 GO
 
 
 --Delete
 Create Procedure DeletePost
-@PostId Int
+@PostId Int,
+@UserId Int
 As
 UPDATE Posts 
 SET Deletet = 0
-WHERE PostId = @PostId
+WHERE PostId = @PostId and UserId = @UserId
 GO
 
 
@@ -246,7 +250,8 @@ GO
 Create Procedure ReadUsers
 As
 Select *
-From Users
+From Users 
+Where Deletet = 1
 GO
 
 
@@ -256,7 +261,7 @@ Create Procedure ReadOneUser
 As
 Select *
 From Users
-Where UserId = @UserId
+Where UserId = @UserId and Deletet = 1
 GO
 
 
@@ -267,7 +272,7 @@ Create Procedure ReadOneUserForLogin
 As
 Select *
 From Users
-Where UserName = @UserName and Password = @Password
+Where UserName = @UserName and Password = @Password and Deletet = 1
 GO
 
 
