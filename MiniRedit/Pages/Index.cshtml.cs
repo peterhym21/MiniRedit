@@ -37,14 +37,23 @@ namespace MiniRedit.Pages
 
 
 
-        public async Task OnGetAsync(int userid)
+        public async Task<IActionResult> OnGetAsync(int userid)
         {
-            if (userid == 0)
-                userid = 1;
-            User = await _usersServices.GetUserById(userid);
-            BoardsSelect = new SelectList(await _boardsServices.GetBoards(), "BoardId", "Title");
-            Posts = await _postsServices.GetTopTen();
-            Boards = await _boardsServices.GetBoards();
+            try
+            {
+                if (userid == 0)
+                    userid = 1;
+                User = await _usersServices.GetUserById(userid);
+                BoardsSelect = new SelectList(await _boardsServices.GetBoards(), "BoardId", "Title");
+                Posts = await _postsServices.GetTopTen();
+                Boards = await _boardsServices.GetBoards();
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
     }
 }

@@ -29,15 +29,31 @@ namespace MiniRedit.Pages.Boards
 
         public BoardsDTO Boards { get; set; }
 
-        public async Task OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Boards = await _boardsServices.GetOneBoard(id);
+            try
+            {
+                Boards = await _boardsServices.GetOneBoard(id);
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
         }
 
         public async Task<IActionResult> OnPostAsynce(int id)
         {
-            await _boardsServices.DeleteBoard(id);
-            return RedirectToPage("ViewAllBoards");
+            try
+            {
+                await _boardsServices.DeleteBoard(id);
+                return RedirectToPage("ViewAllBoards");
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
 
     }

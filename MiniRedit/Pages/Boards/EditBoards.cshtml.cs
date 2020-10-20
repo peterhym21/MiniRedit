@@ -32,23 +32,40 @@ namespace MiniRedit.Pages.Boards
         [BindProperty]
         public string Title { get; set; }
 
-        public async Task OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Boards = await _boardsServices.GetOneBoard(id);
+            try
+            {
+                Boards = await _boardsServices.GetOneBoard(id);
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            Boards = await _boardsServices.GetOneBoard(id);
-
-            if (Title != null)
+            try
             {
-                Boards.Title = Title;
-                await _boardsServices.UpdateBoard(Boards);
-            }
-            else
-                await _boardsServices.UpdateBoard(Boards);
+                Boards = await _boardsServices.GetOneBoard(id);
 
-            return RedirectToPage("ViewAllBoards");
+                if (Title != null)
+                {
+                    Boards.Title = Title;
+                    await _boardsServices.UpdateBoard(Boards);
+                }
+                else
+                    await _boardsServices.UpdateBoard(Boards);
+
+                return RedirectToPage("ViewAllBoards");
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
     }
 }

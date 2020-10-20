@@ -31,16 +31,32 @@ namespace MiniRedit.Pages.Users
         [BindProperty]
         public UsersDTO User { get; set; }
 
-        public async Task OnGetAsync(int userid)
+        public async Task<IActionResult> OnGetAsync(int userid)
         {
-            User = await _usersServices.GetUserById(userid);
+            try
+            {
+                User = await _usersServices.GetUserById(userid);
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
 
         public async Task<IActionResult> OnPostAsync(int userid)
         {
-            await _usersServices.DeleteUser(userid);
-
-            return RedirectToPage("../Index");
+            try
+            {
+                await _usersServices.DeleteUser(userid);
+                return RedirectToPage("../Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
     }
 }

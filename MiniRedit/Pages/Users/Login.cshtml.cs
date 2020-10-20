@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -27,10 +28,10 @@ namespace MiniRedit.Pages.Users
         }
         #endregion
 
-        [BindProperty]
+        [BindProperty, Required]
         public string Username { get; set; }
 
-        [BindProperty]
+        [BindProperty, Required]
         public string Password { get; set; }
 
         public UsersDTO User { get; set; }
@@ -42,11 +43,19 @@ namespace MiniRedit.Pages.Users
 
         public async Task<IActionResult> OnPostAsync()
         {
-            User = await _usersServices.GetUserlogin(Username, Password);
-            if (User == null)
+            try
+            {
+                User = await _usersServices.GetUserlogin(Username, Password);
+                if (User == null)
+                    return RedirectToPage("../Error");
+                else
+                    return RedirectToPage("UserPage", new { userid = User.UserId });
+            }
+            catch (Exception)
+            {
                 return RedirectToPage("../Error");
-            else
-                return RedirectToPage("UserPage", new { userid = User.UserId });
+            }
+            
         }
 
         public IActionResult OnPostCreate()

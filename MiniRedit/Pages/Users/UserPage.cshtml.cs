@@ -31,11 +31,20 @@ namespace MiniRedit.Pages.Users
         public List<BoardsDTO> Boards { get; set; }
         public UsersDTO User { get; set; }
 
-        public async Task OnGetAsync(int userid)
+        public async Task<IActionResult> OnGetAsync(int userid)
         {
-            User = await _usersServices.GetUserById(userid);
-            Posts = await _postsServices.GetPostsFromUser(userid);
-            Boards = await _boardsServices.GetBoards();
+            try
+            {
+                User = await _usersServices.GetUserById(userid);
+                Posts = await _postsServices.GetPostsFromUser(userid);
+                Boards = await _boardsServices.GetBoards();
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
     }
 }

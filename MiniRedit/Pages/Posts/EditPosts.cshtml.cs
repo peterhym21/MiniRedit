@@ -35,41 +35,55 @@ namespace MiniRedit.Pages.Posts
         public BoardsDTO Board { get; set; }
 
 
-        public async Task OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Post = await _postsServices.GetPostById(id);
-            Board = await _boardsServices.GetOneBoard(Post.BoardId);
+            try
+            {
+                Post = await _postsServices.GetPostById(id);
+                Board = await _boardsServices.GetOneBoard(Post.BoardId);
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            Post = await _postsServices.GetPostById(id);
-            if (PostEdit == null)
+            try
             {
-                await _postsServices.UpdatePost(Post);
-                return RedirectToPage("PostDetails", new { id = id });
+                Post = await _postsServices.GetPostById(id);
+                if (PostEdit == null)
+                {
+                    await _postsServices.UpdatePost(Post);
+                    return RedirectToPage("PostDetails", new { id = id });
+                }
+                if (PostEdit.Title != null)
+                {
+                    Post.Title = PostEdit.Title;
+                    await _postsServices.UpdatePost(Post);
+                    return RedirectToPage("PostDetails", new { id = id });
+                }
+                if (PostEdit.Content != null)
+                {
+                    Post.Content = PostEdit.Content;
+                    await _postsServices.UpdatePost(Post);
+                    return RedirectToPage("PostDetails", new { id = id });
+                }
+                else
+                {
+                    Post.Title = PostEdit.Title;
+                    Post.Content = PostEdit.Content;
+                    await _postsServices.UpdatePost(Post);
+                    return RedirectToPage("PostDetails", new { id = id });
+                }
             }
-            if (PostEdit.Title != null)
+            catch (Exception)
             {
-                Post.Title = PostEdit.Title;
-                await _postsServices.UpdatePost(Post);
-                return RedirectToPage("PostDetails", new { id = id });
+                return RedirectToPage("../Error");
             }
-            if (PostEdit.Content != null)
-            {
-                Post.Content = PostEdit.Content;
-                await _postsServices.UpdatePost(Post);
-                return RedirectToPage("PostDetails", new { id = id });
-            }
-            else
-            {
-                Post.Title = PostEdit.Title;
-                Post.Content = PostEdit.Content;
-                await _postsServices.UpdatePost(Post);
-                return RedirectToPage("PostDetails", new { id = id });
-            }
-                
-            return RedirectToPage("PostDetails", new { id = id });
+            
         }
 
     }

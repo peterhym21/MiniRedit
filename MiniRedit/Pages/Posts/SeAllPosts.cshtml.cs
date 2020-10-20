@@ -32,10 +32,19 @@ namespace MiniRedit.Pages.Posts
         public List<BoardsDTO> Boards { get; set; }
 
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Posts = await _postsServices.GetPosts();
-            Boards = await _boardsServices.GetBoards();
+            try
+            {
+                Posts = await _postsServices.GetPosts();
+                Boards = await _boardsServices.GetBoards();
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
     }
 }

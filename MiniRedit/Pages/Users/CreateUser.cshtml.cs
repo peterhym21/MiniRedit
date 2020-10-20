@@ -46,11 +46,23 @@ namespace MiniRedit.Pages.Users
             }
             else
             {
-                Userid = await _usersServices.CreateUseres(User);
-                if (User == null)
+                try
+                {
+                    Userid = await _usersServices.CreateUseres(User);
+                    if (User == null)
+                    {
+                        return RedirectToPage("../Error");
+                    }
+                    else
+                    {
+                        return RedirectToPage("UserPage", new { userid = User.UserId });
+                    }
+                }
+                catch (Exception)
+                {
                     return RedirectToPage("../Error");
-                else
-                    return RedirectToPage("UserPage", new { userid = User.UserId });
+                }
+                
             }
 
             return Page();

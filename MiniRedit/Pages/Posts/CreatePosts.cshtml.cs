@@ -43,23 +43,40 @@ namespace MiniRedit.Pages.Posts
 
         public BoardsDTO board { get; set; }
 
-        public async Task OnGetAsync(int userid)
+        public async Task<IActionResult> OnGetAsync(int userid)
         {
-            if (userid == 0)
-                userid = 1;
+            try
+            {
+                if (userid == 0)
+                    userid = 1;
 
-            User = await _usersServices.GetUserById(userid);
+                User = await _usersServices.GetUserById(userid);
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
 
         public async Task<IActionResult> OnPostAsync(int userid)
         {
-            posts.UserId = userid;
-            board.Title = Board;
+            try
+            {
+                posts.UserId = userid;
+                board.Title = Board;
 
-            posts.BoardId = await _boardsServices.CreateBoard(board);
-            postId = await _postsServices.CreatePost(posts);
+                posts.BoardId = await _boardsServices.CreateBoard(board);
+                postId = await _postsServices.CreatePost(posts);
 
-            return RedirectToPage("PostDetails", new { id = postId });
+                return RedirectToPage("PostDetails", new { id = postId });
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
 
     }

@@ -34,74 +34,90 @@ namespace MiniRedit.Pages.Users
         public UsersDTO User { get; set; }
         public UsersDTO UserEdit { get; set; }
 
-        public async Task OnGetAsync(int userid)
+        public async Task<IActionResult> OnGetAsync(int userid)
         {
-            User = await _usersServices.GetUserById(userid);
+            try
+            {
+                User = await _usersServices.GetUserById(userid);
+                return Page();
+            }
+            catch (Exception)
+            {
+                return RedirectToPage("../Error");
+            }
+            
         }
 
         public async Task<IActionResult> OnPostAsync(int userid)
         {
-            User = await _usersServices.GetUserById(userid);
+            try
+            {
+                User = await _usersServices.GetUserById(userid);
 
-            if (UserEdit == null)
+                if (UserEdit == null)
+                {
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+                }
+
+                #region if 1 perameter
+                if (UserEdit.Name != null)
+                {
+                    User.Name = UserEdit.Name;
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+                }
+                if (UserEdit.UserName != null)
+                {
+                    User.UserName = UserEdit.UserName;
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+                }
+                if (UserEdit.Password != null)
+                {
+                    User.Password = UserEdit.Password;
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+                }
+                #endregion
+
+                #region if 2 perameter
+                if (UserEdit.Password != null && UserEdit.UserName != null)
+                {
+                    User.UserName = UserEdit.UserName;
+                    User.Password = UserEdit.Password;
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+                }
+                if (UserEdit.Name != null && UserEdit.UserName != null)
+                {
+                    User.UserName = UserEdit.UserName;
+                    User.Name = UserEdit.Name;
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+                }
+                if (UserEdit.Password != null && UserEdit.Name != null)
+                {
+                    User.Name = UserEdit.Name;
+                    User.Password = UserEdit.Password;
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+                }
+                #endregion
+
+                else
+                {
+                    await _usersServices.UpdateUser(User);
+                    return RedirectToPage("UserPage", new { userid });
+
+                }
+            }
+            catch (Exception)
             {
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
+                return RedirectToPage("../Error");
             }
 
-            #region if 1 perameter
-            if (UserEdit.Name != null)
-            {
-                User.Name = UserEdit.Name;
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
-            }
-            if (UserEdit.UserName != null)
-            {
-                User.UserName = UserEdit.UserName;
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
-            }
-            if (UserEdit.Password != null)
-            {
-                User.Password = UserEdit.Password;
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
-            }
-            #endregion
 
-            #region if 2 perameter
-            if (UserEdit.Password != null && UserEdit.UserName != null)
-            {
-                User.UserName = UserEdit.UserName;
-                User.Password = UserEdit.Password;
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
-            }
-            if (UserEdit.Name != null && UserEdit.UserName != null)
-            {
-                User.UserName = UserEdit.UserName;
-                User.Name = UserEdit.Name;
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
-            }
-            if (UserEdit.Password != null && UserEdit.Name != null)
-            {
-                User.Name = UserEdit.Name;
-                User.Password = UserEdit.Password;
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
-            }
-            #endregion
-
-            else
-            {
-                await _usersServices.UpdateUser(User);
-                return RedirectToPage("UserPage", new { userid });
-
-            }
-
-            return RedirectToPage("UserPage", new { userid });
         }
     }
 }
