@@ -28,21 +28,23 @@ namespace MiniRedit.Pages
         }
         #endregion
 
+        #region Prop
         public SelectList BoardsSelect { get; set; }
         public int SelectedId { get; set; }
         public List<PostsDTO> Posts { get; set; }
         public List<BoardsDTO> Boards { get; set; }
         public UsersDTO User { get; set; }
-
-
-
+        #endregion
 
         public async Task<IActionResult> OnGetAsync(int userid)
         {
             try
             {
+                // if no userid set to default user
                 if (userid == 0)
                     userid = 1;
+
+                // get all info for font page
                 User = await _usersServices.GetUserById(userid);
                 BoardsSelect = new SelectList(await _boardsServices.GetBoards(), "BoardId", "Title");
                 Posts = await _postsServices.GetTopTen();

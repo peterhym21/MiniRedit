@@ -28,15 +28,12 @@ namespace MiniRedit.Pages.Users
         }
         #endregion
 
+        #region Prop
         public int Userid { get; set; }
-
         [BindProperty, Required]
         public UsersDTO User { get; set; }
+        #endregion
 
-        public void OnGet()
-        {
-
-        }
 
         public async Task<IActionResult> OnPostAsync()
         {

@@ -27,9 +27,11 @@ namespace MiniRedit.Pages.Users
         }
         #endregion
 
+        #region Prop
         public List<PostsDTO> Posts { get; set; }
         public List<BoardsDTO> Boards { get; set; }
         public UsersDTO User { get; set; }
+        #endregion
 
         public async Task<IActionResult> OnGetAsync(int userid)
         {

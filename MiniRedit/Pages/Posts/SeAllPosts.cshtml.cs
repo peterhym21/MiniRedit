@@ -27,9 +27,11 @@ namespace MiniRedit.Pages.Posts
         }
         #endregion
 
+        #region Prop
         public int SelectedCategoryId { get; set; }
         public List<PostsDTO> Posts { get; set; }
         public List<BoardsDTO> Boards { get; set; }
+        #endregion
 
 
         public async Task<IActionResult> OnGetAsync()

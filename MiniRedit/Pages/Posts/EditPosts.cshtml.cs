@@ -27,12 +27,12 @@ namespace MiniRedit.Pages.Posts
         }
         #endregion
 
+        #region Prop
         [BindProperty]
         public PostsDTO PostEdit { get; set; }
-
         public PostsDTO Post { get; set; }
-
         public BoardsDTO Board { get; set; }
+        #endregion
 
 
         public async Task<IActionResult> OnGetAsync(int id)
@@ -49,11 +49,14 @@ namespace MiniRedit.Pages.Posts
             }
         }
 
+
+
         public async Task<IActionResult> OnPostAsync(int id)
         {
             try
             {
                 Post = await _postsServices.GetPostById(id);
+
                 if (PostEdit == null)
                 {
                     await _postsServices.UpdatePost(Post);

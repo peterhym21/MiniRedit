@@ -27,7 +27,11 @@ namespace MiniRedit.Pages.Boards
         }
         #endregion
 
+        /// <summary>
+        /// Prop
+        /// </summary>
         public BoardsDTO Boards { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -41,6 +45,7 @@ namespace MiniRedit.Pages.Boards
                 return RedirectToPage("../Error");
             }
         }
+
 
         public async Task<IActionResult> OnPostAsynce(int id)
         {

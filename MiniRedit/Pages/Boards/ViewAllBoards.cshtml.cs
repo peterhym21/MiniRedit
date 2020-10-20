@@ -27,9 +27,10 @@ namespace MiniRedit.Pages.Boards
         }
         #endregion
 
+        #region Prop
         public int SelectetId { get; set; }
-
         public List<BoardsDTO> Boards { get; set; }
+        #endregion
 
 
         public async Task<IActionResult> OnGetAsync()

@@ -27,21 +27,20 @@ namespace MiniRedit.Pages.Posts
         }
         #endregion
 
-        public int BoardId { get; set; }
-        public List<PostsDTO> Posts { get; set; }
-        public List<BoardsDTO> Boards { get; set; }
-        public int postId { get; set; }
-
-
+        #region Prop
         [BindProperty]
         public string Board { get; set; }
-
-        public UsersDTO User { get; set; }
+        public int BoardId { get; set; }
+        public int postId { get; set; }
 
         [BindProperty]
         public PostsDTO posts { get; set; }
-
+        public UsersDTO User { get; set; }
         public BoardsDTO board { get; set; }
+        public List<PostsDTO> Posts { get; set; }
+        public List<BoardsDTO> Boards { get; set; }
+        #endregion
+
 
         public async Task<IActionResult> OnGetAsync(int userid)
         {
@@ -59,6 +58,7 @@ namespace MiniRedit.Pages.Posts
             }
             
         }
+
 
         public async Task<IActionResult> OnPostAsync(int userid)
         {

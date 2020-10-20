@@ -30,6 +30,7 @@ namespace MiniRedit
         {
             string conString = Configuration.GetConnectionString("DefaultConnection");
 
+            #region singolton
             services.AddSingleton<MappingService, MappingService>();
 
             services.AddSingleton<IBoardsServices, BoardsServices>();
@@ -40,6 +41,7 @@ namespace MiniRedit
 
             services.AddSingleton<IUsersServices, UsersServices>();
             services.AddSingleton<IUsersRepository>(new UsersRepository(conString));
+            #endregion
 
             services.AddRazorPages();
         }

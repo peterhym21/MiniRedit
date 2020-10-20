@@ -27,10 +27,12 @@ namespace MiniRedit.Pages.Boards
         }
         #endregion
 
-        public BoardsDTO Boards { get; set; }
-
+        #region Prop
         [BindProperty]
         public string Title { get; set; }
+        public BoardsDTO Boards { get; set; }
+        #endregion
+
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -45,6 +47,8 @@ namespace MiniRedit.Pages.Boards
             }
             
         }
+
+
         public async Task<IActionResult> OnPostAsync(int id)
         {
             try

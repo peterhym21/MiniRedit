@@ -29,10 +29,11 @@ namespace MiniRedit.Pages.Users
         }
         #endregion
 
-
+        #region Prop
         [BindProperty]
         public UsersDTO User { get; set; }
         public UsersDTO UserEdit { get; set; }
+        #endregion
 
         public async Task<IActionResult> OnGetAsync(int userid)
         {
@@ -47,6 +48,8 @@ namespace MiniRedit.Pages.Users
             }
             
         }
+
+
 
         public async Task<IActionResult> OnPostAsync(int userid)
         {
