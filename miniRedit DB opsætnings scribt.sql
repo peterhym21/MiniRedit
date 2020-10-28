@@ -1,12 +1,14 @@
-Use master
-GO
+--Use master
+--GO
 
-Create Database MiniRedit
-GO
+--Create Database MiniRedit
+--GO
 
-Use MiniRedit
-GO
+--Use MiniRedit
+--GO
 
+Use TranieeTask
+GO
 
 ------------------------------------------------------------------------------------------------------------
 -- Create Tables

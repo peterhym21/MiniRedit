@@ -29,6 +29,7 @@ namespace MiniRedit
         public void ConfigureServices(IServiceCollection services)
         {
             string conString = Configuration.GetConnectionString("DefaultConnection");
+            //string conString = Configuration.GetConnectionString("Main");
 
             #region singolton
             services.AddSingleton<MappingService, MappingService>();

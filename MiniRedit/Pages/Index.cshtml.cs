@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using MiniReditServices.DTO;
 using MiniReditServices.Interfaces;
+using Service.Services.Base;
 
 namespace MiniRedit.Pages
 {
@@ -50,6 +51,7 @@ namespace MiniRedit.Pages
                 Posts = await _postsServices.GetTopTen();
                 Boards = await _boardsServices.GetBoards();
                 return Page();
+
             }
             catch (Exception)
             {
